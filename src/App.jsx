@@ -7,11 +7,7 @@ import { BrowserRouter as Router,
 export default function App() {
   return (
     <Router>
-        <Routes>
-            <Route element={<Layout />}>
 
-            <Route />
-        </Routes>
     </Router>
   );
 }
