@@ -1,0 +1,4 @@
+.Connect {
+    background-color: purple;
+    height: calc(100vh - var(--header-height));
+}

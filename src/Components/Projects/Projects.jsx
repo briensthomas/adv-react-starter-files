@@ -1,10 +1,10 @@
-import React from 'react';
+import styles from './Projects.css';
 
 export default function Projects() {
   return (
-    <div>
+    <div className={styles.Projects}>
       <h2>
-        Projects
+        Projects Page
       </h2>
     </div>
   );
