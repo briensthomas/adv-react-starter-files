@@ -1,52 +1,53 @@
+import { CheckBoxControl, 
+  FormButton, 
+  InputControl, 
+  SelectControl, 
+  TextAreaControl } from '../FormControls/FormControls';
+import styles from './Dashboard.css';
 export default function Dashboard() {
   return (
-    <div>
+    <div className={styles.Dashboard}>
       <h2>
         Hello World
       </h2>
-
       <form>
-        <label htmlFor="name">Name
-          <input name="name" value={name} placeholder="Enter your name"/>
-        </label>
+        <InputControl 
+          label="Name"
+          name="name"
+          placeholder="Enter your name"  
+        />
 
-        <label>
-          Date
-          <input type="date" name="date" />
+        <InputControl
+          label="Date"
+          type="date"
+          required
+          name="date"
+          placeholder="Pick a date"
+        />
 
-        </label>
+        <SelectControl
+          label="Pets"
+          required
+          name="pets"
+          placeholder="What is your favorite pet?"
+        >
+          <option value="1">Dog</option>
+          <option value="2">Cat</option>
+          <option value="3">Birb</option>
+        </SelectControl>
 
-        <label>
-          Option
-          <select required>
-            <option selected disabled>Choose One</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-          </select>
-        </label>
+        <TextAreaControl 
+          label="Bio"
+          name="bio"
+          placeholder="Tell us about yourself"
+        />
 
-        <label>
-          Bio
-          <textarea name="bio" placeholder="From whence do you come" />
-        </label>
+        <CheckBoxControl 
+          legend="Do you accept?"
+          label="Yes"
+        />
 
-        <fieldset>
-          <legend>
-            Do you agree to the terms and conditions?
-          </legend>
-          <label>
-            Yes
-            <input type="checkbox" />
-          </label>
-          <label>
-            No
-            <input type="checkbox" />
-          </label>
-        </fieldset>
-        <button>
-          Submit
-        </button>
+        <FormButton text="Submit" />
       </form>
     </div>
   );
