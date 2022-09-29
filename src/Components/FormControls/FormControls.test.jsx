@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import {
-  CheckboxControl,
+  CheckBoxControl,
   FormButton,
   InputControl,
   SelectControl,
@@ -38,4 +38,83 @@ test('Input Control, date', async () => {
   expect(inputControl.name).toBe('date');
   expect(inputControl.required).toBe(true);
   expect(inputControl.placeholder).toBe('Pick a date');
+});
+
+test('Select Control', async () => {
+  render (
+    <SelectControl
+      label="Pets"
+      required
+      name="pets"
+    >
+      <option value="1">Dog</option>
+      <option value="2">Cat</option>
+      <option value="3">Birb</option>
+    </SelectControl>
+
+  );
+  const selectControl = screen.getByLabelText('Pets');
+  expect(selectControl.name).toBe('pets');
+  expect(selectControl.required).toBe(true);
+  expect(selectControl.options.length).toBe(3);
+});
+
+test('Select Control w/ placeholder', async () => {
+  render (
+    <SelectControl
+      label="Pets"
+      required
+      name="pets"
+      placeholder="What is your favorite pet?"
+    >
+      <option value="1">Dog</option>
+      <option value="2">Cat</option>
+      <option value="3">Birb</option>
+    </SelectControl>
+
+  );
+  const selectControl = screen.getByLabelText('Pets');
+  const placeHolderOption = selectControl.options[0];
+  expect(selectControl.name).toBe('pets');
+  expect(selectControl.required).toBe(true);
+  expect(placeHolderOption.textContent).toBe('What is your favorite pet?');
+  expect(selectControl.options.length).toBe(4);
+});
+
+test('TextAreaControl', async () => {
+  render (
+    <TextAreaControl 
+      label="Bio"
+      name="bio"
+      placeholder="Tell us about yourself"
+    />
+  );
+  const textAreaControl = screen.getByLabelText('Bio');
+  expect(textAreaControl.name).toBe('bio');
+  expect(textAreaControl.required).toBe(false);
+  expect(textAreaControl.placeholder).toBe('Tell us about yourself');
+});
+
+test('CheckBoxControl', async () => {
+  render (
+    <CheckBoxControl 
+      legend="Do you accept?"
+      label="Yes"
+      required
+    />
+  );
+
+  const legend = screen.getByText('Do you accept?');
+  expect(legend).not.toBeNull();
+  const checkBoxControl = screen.getByLabelText('Yes');
+  expect(checkBoxControl.required).toBe(true);
+});
+
+test('FormButton', async () => {
+  render (
+    <FormButton text="Submit" />
+  );
+
+  const button = screen.getByRole('button');
+  expect(button.textContent).toBe('Submit');
 });
