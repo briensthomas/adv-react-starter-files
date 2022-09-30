@@ -45,6 +45,7 @@ export default function Dashboard() {
         <CheckBoxControl 
           legend="Do you accept?"
           label="Yes"
+          required
         />
 
         <FormButton text="Submit" />

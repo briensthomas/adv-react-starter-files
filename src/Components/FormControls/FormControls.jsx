@@ -2,32 +2,47 @@
 import styles from './FormControls.css';
 import classnames from 'classnames';
 
-export default function FormControls({ label, children }) {
+export default function FormControls({ label, 
+  required, 
+  children }) {
   const className = classnames(styles.FormControls, styles.LabelText);
+  
   return (
     <label className={className}>
-      {label}
+      <LabelText text={label} required={required} />
       {children}
     </label>
   );
 }
 
+function LabelText({ text, required }) {
+  const className = classnames(styles.LabelText, {
+    [styles.Required]: required,
+  });
 
-export  function InputControl({ label, ...rest }) {
   return (
-    <FormControls label={label}>
-      <input {...rest} />
+    <span className={className}>
+      {text}
+    </span>
+  );
+}
+
+export  function InputControl({ label, required, ...rest }) {
+  return (
+    <FormControls label={label} required={required}>
+      <input {...rest} required={required} />
     </FormControls>
   );
 }
 
 export function SelectControl({ label,
+  required,
   children,
   placeholder,
   ...rest }) {
   return (
-    <FormControls label={label}>
-      <select {...rest}>
+    <FormControls label={label} required={required}>
+      <select {...rest} required={required}>
         {placeholder && <option disabled>
           {placeholder}
         </option>}
@@ -37,33 +52,37 @@ export function SelectControl({ label,
   );
 }
 
-export function TextAreaControl({ label, ...rest }) {
+export function TextAreaControl({ label, required, ...rest }) {
   return (
-    <FormControls label={label}>
+    <FormControls label={label} required={required}>
       <textarea {...rest}/>
             
     </FormControls>
   );
 }
 
-export function CheckBoxControl({ legend, label, ...rest }) {
+export function CheckBoxControl({ legend, 
+  label, 
+  required, 
+  ...rest }) {
   return (
     <fieldset className={styles.CheckBoxControl}>
       <legend className={styles.LabelText}>
-        {legend}
+        <LabelText text={legend} required={required}/>
       </legend>
       <label>
-        <input type="checkbox" {...rest}/>
+        <input type="checkbox" {...rest} required={required} />
         {label}
+        
       </label>
     </fieldset>
   );
 }
 
-export function FormButton({ text }) {
+export function FormButton({ children, ...rest }) {
   return (
-    <button className={styles.FormButton}>
-      {text}
+    <button className={styles.FormButton} {...rest} >
+      {children}
     </button>
   );
 }
