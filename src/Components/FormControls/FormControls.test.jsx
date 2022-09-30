@@ -119,3 +119,25 @@ test('FormButton', async () => {
   const button = screen.getByRole('button');
   expect(button.textContent).toBe('Submit');
 });
+
+function testRequired(controlType, Component) {
+  test(`Required ${controlType} Control`, async () => {
+    render(
+      <Component legend="label" label="label" required />
+    );
+    const label = screen.getByText('label');
+    expect(label.classList.contains('Required')).toBe(true);
+  });
+}
+
+testRequired('Input', InputControl);
+testRequired('Select', SelectControl);
+testRequired('TextArea', TextAreaControl);
+
+test('Required CheckboxControl', async () => {
+  render(
+    <CheckBoxControl legend="label" required />
+  );
+  const label = screen.getByText('label');
+  expect(label.classList.contains('Required')).toBe(true);
+});
