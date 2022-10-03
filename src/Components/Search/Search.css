@@ -1,0 +1,29 @@
+.Search {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+}
+
+.SearchForm {
+    display: grid;
+    grid-column: 3fr;
+    margin-bottom: 15px;
+}
+
+.SearchResults {
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    gap: 3em;
+    justify-items: center;
+}
+
+.SearchResultCard {
+    display: grid;
+    justify-items: center;
+    box-shadow: 4px 4px 6px 5px rgba(0,0,0,0.5);
+}
+
+.SearchResultCard img {
+    width: 100%;
+}
