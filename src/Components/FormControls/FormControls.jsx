@@ -2,7 +2,7 @@
 import styles from './FormControls.css';
 import classnames from 'classnames';
 
-export default function FormControls({ label, 
+function FormControls({ label, 
   required, 
   children }) {
   const className = classnames(styles.FormControls, styles.LabelText);
@@ -15,7 +15,7 @@ export default function FormControls({ label,
   );
 }
 
-function LabelText({ text, required }) {
+export function LabelText({ text, required }) {
   const className = classnames(styles.LabelText, {
     [styles.Required]: required,
   });

@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {
   CheckBoxControl,
   FormButton,
   InputControl,
   SelectControl,
   TextAreaControl,
-} from './FormControls.jsx';
+} from '../Components/FormControls/FormControls.jsx';
 
 test('Input Control', async () => {
   render(
