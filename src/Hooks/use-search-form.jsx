@@ -7,8 +7,8 @@ export default function useSearchForm() {
   const [pokemon, setPokemon] = useState(useableSearchParams.pokemon || '');
   return {
     pokemon,
-    setPokemon,
     searchForm: useableSearchParams,
+    setPokemon,
     setSearchForm: setSearchParams,
   };
 }
