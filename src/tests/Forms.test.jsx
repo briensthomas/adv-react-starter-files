@@ -94,7 +94,7 @@ test('Control changes update data', async () => {
   });
 });
 
-test('Form updates data when initialData changes', async () => {
+test('Form uses initial data and updates partial data', async () => {
   const user = userEvent.setup();
 
   const handleSubmit = jest.fn();
@@ -140,4 +140,46 @@ test('Form updates data when initialData changes', async () => {
     bio: 'As a young truck...',
     accepted: true
   });
+});
+
+test('Form updates data when initialData changes', async () => {
+  const user = userEvent.setup();
+
+  const handleSubmit = jest.fn();
+
+  const { rerender } = render(
+    <Test 
+      onSubmit={handleSubmit}
+      formData={{
+        name: 'Enter your name',
+        pets: '1',
+        bio: 'Tell us about yourself',
+        accepted: true,
+      }}
+    />
+  );
+
+  // input text
+  const input = screen.getByLabelText('Name');
+  await user.clear(input);
+  await user.type(input, 'abc');
+
+  const changedData = {
+    accepted: false,
+    animal: '2',
+    bio: 'Tell me about YOURself',
+    name: 'Mind Ya Business',
+  };
+
+  rerender (
+    <Test 
+      onSubmit={handleSubmit}
+      formData={changedData}
+    />
+  );
+
+  // user clicks submit
+  await user.click(screen.getByRole('button'));
+  
+  expect(handleSubmit).toHaveBeenCalledWith(changedData);
 });
