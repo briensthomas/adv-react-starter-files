@@ -3,15 +3,15 @@ import SearchResultCard from './SearchResultCard';
 
 export default function SearchResults({ results, infiniteScrollRef }) {
   return (
-    <ul className={styles.SearchResults}>
+    <div className={styles.SearchResults}>
       {results.map((result, i) => {
-        const ref = i = results.length - 3 ? infiniteScrollRef : undefined;
+        const ref = i == results.length - 3 ? infiniteScrollRef : undefined;
         return <SearchResultCard
-          key={result.id}
-          result={pokemon}
+          key={result._id}
+          pokemon={result}
           infiniteScrollRef={ref}
-        />
+        />;
       })}
-    </ul>
+    </div>
   );
 }

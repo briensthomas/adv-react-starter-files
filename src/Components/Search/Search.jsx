@@ -1,12 +1,11 @@
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import useSearchResults from '../../Hooks/use-search-results';
-import { FormButton } from '../FormControls/FormControls';
+import styles from './Search.css';
 
 export default function Search() {
   const {
     infiniteScrollRef,
-    nextPage,
     pokemon, 
     setPokemon,
     searchResults,
@@ -14,9 +13,9 @@ export default function Search() {
   } = useSearchResults();
   
   return (
-    <div>
-
-      <SearchForm pokemon={pokemon} 
+    <div className={styles.Search}>
+      <SearchForm 
+        pokemon={pokemon} 
         setPokemon={setPokemon} 
         onSubmit={searchPokedex} 
       />
@@ -24,9 +23,7 @@ export default function Search() {
         results={searchResults} 
         infiniteScrollRef={infiniteScrollRef} 
       />
-      <FormButton onClick={nextPage}>
-        Next Page
-      </FormButton>
+
     </div>
   );
 }
