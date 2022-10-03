@@ -1,7 +1,14 @@
-import React from 'react'
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-export default function use-search-form() {
-  return (
-    <div>use-search-form</div>
-  )
+export default function useSearchForm() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const useableSearchParams = Object.fromEntries(searchParams.entries());
+  const [pokemon, setPokemon] = useState(useableSearchParams.pokemon || '');
+  return {
+    pokemon,
+    setPokemon,
+    searchForm: useableSearchParams,
+    setSearchForm: setSearchParams,
+  };
 }
