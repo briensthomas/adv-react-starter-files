@@ -94,10 +94,50 @@ test('Control changes update data', async () => {
   });
 });
 
-// test('Form updates data when initialData changes', async () => {
-//   const user = userEvent.setup();
+test('Form updates data when initialData changes', async () => {
+  const user = userEvent.setup();
 
-//   const handleSubmit = jest.fn();
+  const handleSubmit = jest.fn();
 
-//   const { rerender } = 
-// })
+  render (
+    <Test 
+      onSubmit={handleSubmit}
+      formData={{
+        name: 'Enter your name',
+        pets: '1',
+        bio: 'Tell us about yourself',
+        accepted: true,
+      }}
+    />
+  );
+
+  // input
+  const input = screen.getByLabelText('Name');
+  expect(input.value).toBe('Enter your name');
+  await user.clear(input);
+  await user.type(input, 'Trucky McTruckface');
+
+  // select
+  const selectControl = screen.getByLabelText('Pets');
+  await user.selectOptions(selectControl, '1');
+
+  // input for TextArea
+  const textArea = screen.getByLabelText('Bio');
+  expect(textArea.value).toBe('Tell us about yourself');
+  await user.clear(textArea);
+  await user.type(textArea, 'As a young truck...');
+
+  // checkbox
+  const checkbox = screen.getByLabelText('Yes');
+  expect(checkbox.checked).toBe(true);
+
+  // FormButton
+  await user.click(screen.getByRole('button'));
+
+  expect(handleSubmit).toHaveBeenCalledWith({
+    name: 'Trucky McTruckface',
+    pets: '1',
+    bio: 'As a young truck...',
+    accepted: true
+  });
+});
